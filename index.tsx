@@ -1,8 +1,10 @@
 import blessed from "blessed";
 import { render } from "react-blessed";
 import { game } from "game";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { reaction } from "mobx";
+import { Layout } from "@layout";
+import { GameLoading } from "@components";
 
 const screen = blessed.screen({
   autoPadding: true,
@@ -17,6 +19,7 @@ screen.key(["escape", "q", "C-c"], (ch, key) => {
 const App = () => {
   const { screens } = game;
   const [ CurrentScreen, setCurrentScreen ] = useState(() => screens['main']);
+  const [ loading, setLoading ] = useState(true)
 
   reaction(
     () => game.currentScreen,
@@ -25,7 +28,14 @@ const App = () => {
     }
   );
 
-  return CurrentScreen();
+  return (
+    <Layout>
+      {loading ?
+        <GameLoading setLoading={setLoading} />
+        : CurrentScreen()
+      }
+    </Layout>
+  );
 };
 
 render(<App />, screen);

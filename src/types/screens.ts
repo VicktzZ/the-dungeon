@@ -1,0 +1,1 @@
+export type Screens = 'main' | 'game' | 'loading';

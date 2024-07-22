@@ -1,1 +1,0 @@
-export type Screens = 'main' | 'dungeon' | 'game' | 'settings'

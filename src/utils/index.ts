@@ -1,5 +1,5 @@
-import { Dungeon } from "./Dungeon";
+import { difficultModificator } from "./difficultModificator";
 
 export {
-    Dungeon,
+    difficultModificator
 }

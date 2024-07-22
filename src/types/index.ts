@@ -1,7 +1,10 @@
-import type { Event } from "./Event";
-import type { Screens } from "./Screens";
+import type { Event } from "./event";
+import type { Screens } from "./screens";
+
+type Difficult = 'Easy' | 'Medium' | 'Hard' | 'Nightmare'
 
 export type {
     Screens,
-    Event
+    Event,
+    Difficult
 }

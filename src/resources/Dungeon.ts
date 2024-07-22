@@ -14,7 +14,7 @@ export class Dungeon {
     }
 
     getRandomEvent(): Event {
-        return this.events[Math.floor(Math.random() * this.events.length)]
+        return this.events[this.gen.intBetween(0, this.events.length)]
     }
 
     getSeed(): string {
