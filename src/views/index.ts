@@ -1,7 +1,4 @@
-import { Game } from "./game";
-import { Main } from "./main";
+import {Game} from './game';
+import {Main} from './main';
 
-export {
-    Main as MainScreen,
-    Game as GameScreen,
-}
+export {Main as MainScreen, Game as GameScreen};

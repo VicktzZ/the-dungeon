@@ -1,5 +1,3 @@
-import { difficultModificator } from "./difficultModificator";
+import {difficultModificator} from './difficultModificator';
 
-export {
-    difficultModificator
-}
+export {difficultModificator};

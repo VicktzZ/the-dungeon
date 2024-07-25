@@ -1,5 +1,3 @@
-import { Dungeon } from "./Dungeon";
+import {Dungeon} from './Dungeon';
 
-export {
-    Dungeon,
-}
+export {Dungeon};

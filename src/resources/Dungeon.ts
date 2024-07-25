@@ -1,23 +1,23 @@
-import type { Event } from '@types';
-import { makeAutoObservable, observable } from 'mobx';
+import type {Event} from '@types';
+import {makeAutoObservable, observable} from 'mobx';
 import gen from 'random-seed';
 
 export class Dungeon {
-    private seed: string = Math.random().toString();
-    private gen = gen.create(this.seed);
-    
-    @observable floor = 0;
-    events: Event[] = [];
+	private seed: string = Math.random().toString();
+	private gen = gen.create(this.seed);
 
-    constructor() {
-        makeAutoObservable(this)
-    }
+	@observable floor = 0;
+	events: Event[] = [];
 
-    getRandomEvent(): Event {
-        return this.events[this.gen.intBetween(0, this.events.length)]
-    }
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-    getSeed(): string {
-        return this.seed
-    }
+	getRandomEvent(): Event {
+		return this.events[this.gen.intBetween(0, this.events.length)] as Event;
+	}
+
+	getSeed(): string {
+		return this.seed;
+	}
 }

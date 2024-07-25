@@ -1,7 +1,5 @@
+import {Text} from 'ink';
+
 export const Game = () => {
-    return (
-        <text>
-            Game
-        </text>
-    )
-}
+	return <Text>Game</Text>;
+};

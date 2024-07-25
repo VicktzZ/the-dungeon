@@ -1,1 +1,1 @@
-export type Screens = 'main' | 'game' | 'loading';
+export type Screens = 'main' | 'game';

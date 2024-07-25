@@ -1,5 +1,3 @@
-import { Loading } from "./loading";
+import {Loading} from './loading';
 
-export { 
-    Loading as GameLoading
-}
+export {Loading as GameLoading};

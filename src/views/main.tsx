@@ -1,7 +1,5 @@
+import {Text} from 'ink';
+
 export const Main = () => {
-    return (
-        <box>
-            Main
-        </box>
-    )
-}
+	return <Text>Main</Text>;
+};

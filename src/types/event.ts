@@ -1,6 +1,6 @@
 export interface Event {
-    name: string
-    description: string
-    execute(): void
-    type: string
+	name: string;
+	description: string;
+	execute(): void;
+	type: string;
 }
