@@ -1,3 +1,7 @@
-import {Dungeon} from './Dungeon';
+import { Dungeon } from './Dungeon';
+import { terminal } from './Terminal'
 
-export {Dungeon};
+export {
+    Dungeon,
+    terminal
+};
