@@ -1,9 +1,10 @@
 import { terminal } from "@resources"
-import MenuView from "./menuView"
 import { i18n } from "@i18n"
 import { SettingsOptions, DifficultyOptions, HeroOptions } from "@enums"
+import MenuView from "./menuView"
 import chalk from "chalk"
-import { sleep } from "@utils"
+import { heroStats } from "@data"
+import { createPlayer, player } from "@models"
 
 async function selectHero() {
 	terminal.clear()
@@ -29,8 +30,20 @@ async function selectHero() {
 }
 
 async function showHeroDescription(hero: HeroOptions) {
-	await terminal.write(i18n.t(`hero.descriptions.${hero}`), undefined, 10)
-	await terminal.write('\n\nHP: 100 | MP: 100 | ATK: 10 | DEF: 10 | SPD: 10\n')
+	if (hero === HeroOptions.Back) {
+		await selectHero()
+		return
+	}
+
+	await terminal.typeWrite(i18n.t(`hero.descriptions.${hero}`), undefined, 10)
+	terminal.write('\n')
+	terminal.write(`
+		${chalk.red('HP')}: ${heroStats[hero].hp} ${chalk.gray.underline('(Vida máxima)')}
+		${chalk.blue('MP')}: ${heroStats[hero].mp} ${chalk.gray.underline('(Magia máxima)')}
+		${chalk.green('ATK')}: ${heroStats[hero].atk} ${chalk.gray.underline('(Adiciona ao ataque)')}
+		${chalk.yellow('DEF')}: ${heroStats[hero].def} ${chalk.gray.underline('(Adiciona à defesa)')}
+		${chalk.magenta('SPD')}: ${heroStats[hero].spd} ${chalk.gray.underline('(Aumenta a chance de se esquivar)')}
+	\n`)
 
 	const { value: choice } = await terminal.prompt({
 		type: 'list',
@@ -43,7 +56,7 @@ async function showHeroDescription(hero: HeroOptions) {
 	})
 
 	if (choice) {
-
+		createPlayer(hero)
 	} else {
 		await selectHero()
 	}

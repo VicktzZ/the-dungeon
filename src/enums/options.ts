@@ -31,6 +31,6 @@ export enum HeroOptions {
 	Paladin = 'Tharros',
 	Rogue = 'Nyssa',
 
-	Back = 'back'
+	Back = 'Back'
 }
 

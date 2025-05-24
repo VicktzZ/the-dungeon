@@ -1,29 +1,31 @@
+import type { Stats } from '@types';
 import {action, makeObservable, observable} from 'mobx';
+import type { Skill } from './Skill';
 
 export class Entity {
-	@observable hp: number;
-	@observable level: number;
-	name: string;
-	atk: number;
-	def: number;
+		@observable public name: string;
+		@observable public maxHp: number; // Aumenta a vida máxima
+		@observable public hp: number; // Vida atual
+		@observable public maxMp: number; // Necessário para usar magias
+		@observable public mp: number; // Magia atual
+		@observable public atk: number; // Adiciona este valor ao ataque
+		@observable public def: number; // Adiciona este valor à defesa na hora de calcular o dano recebido
+		@observable public spd: number; // Aumenta a chance de se esquivar do ataque
+		@observable public lvl: number;
 
-	constructor({name, hp, atk, def, level}: Partial<Entity>) {
-		this.name = name!;
-		this.hp = hp ?? 0;
-		this.atk = atk ?? 0;
-		this.def = def ?? 0;
-		this.level = level ?? 0;
+		@observable public skills: Skill[] = [];
 
-		makeObservable(this);
-	}
+		public constructor(name: string, lvl: number, stats: Stats) {
+			this.name = name;
+			this.maxHp = stats.hp;
+			this.hp = stats.hp;
+			this.maxMp = stats.mp;
+			this.mp = stats.mp;
+			this.atk = stats.atk;
+			this.def = stats.def;
+			this.spd = stats.spd;
+			this.lvl = lvl;
 
-	@action
-	attack(target: Entity): void {
-		target.hp -= this.atk;
-	}
-
-	@action
-	defend(target: Entity): void {
-		this.hp -= target.atk - this.def < 0 ? 0 : target.atk - this.def;
-	}
+			makeObservable(this);
+		}
 }

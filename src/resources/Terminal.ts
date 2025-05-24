@@ -86,9 +86,13 @@ export class Terminal {
         }
     }
 
-	async write(text: string, style?: ColorName, delay: number = 30): Promise<void> {
+	async typeWrite(text: string, style?: ColorName, delay: number = 30): Promise<void> {
 		const styledText = chalk[style || 'white'](text);
 		return this.typeWriter(styledText, delay)
+	}
+
+	write(text?: string, style?: ColorName): void {
+		process.stdout.write(chalk[style || 'white'](text || ''))
 	}
 
 	async prompt(

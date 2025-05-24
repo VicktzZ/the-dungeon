@@ -1,0 +1,30 @@
+{
+	"Darius": [
+		{
+			"name": "Ataque de Espada",
+			"description": "Ataque básico de guerreiro",
+			"effect": "Ataca o inimigo com seu machado",
+			"mpCost": 0
+		},
+		{
+			"name": "Defesa Simples",
+			"description": "Defesa básica",
+			"effect": "Defende-se contra ataques",
+			"mpCost": 0
+		}
+	],
+	"Lyria": [
+		{
+			"name": "Disparo de Arco",
+			"description": "Ataque básico de arqueiro",
+			"effect": "Ataca o inimigo com sua flecha",
+			"mpCost": 0
+		},
+		{
+			"name": "Defesa Simples",
+			"description": "Defesa básica",
+			"effect": "Defende-se contra ataques",
+			"mpCost": 0
+		}
+	]
+}

@@ -1,10 +1,10 @@
 import { terminal } from "@resources"
-import chalk from "chalk"
-import figlet from 'figlet'
 import { Spinner } from 'cli-spinner'
 import { sleep } from "@utils"
 import { i18n } from '@i18n'
 import { MenuView } from '@views'
+import chalk from "chalk"
+import figlet from 'figlet'
 
 async function run() {
 	const spinner = new Spinner(i18n.t('game.loading'))
@@ -21,7 +21,7 @@ async function run() {
 	spinner.stop()
 
 	terminal.clear()
-	console.log(chalk.magenta(title))
+	terminal.write(chalk.magenta(title))
 	await sleep(2000)
 
 	await MenuView()

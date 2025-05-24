@@ -15,7 +15,7 @@ export default async function MenuView() {
 		verticalLayout: 'full'
 	})
 
-	console.log(chalk.magenta(title))
+	terminal.write(chalk.magenta(title))
 
 	const { value } = await terminal.prompt({
 		type: 'list',
