@@ -1,3 +1,7 @@
-import {difficultModificator} from './difficultModificator';
+import { difficultModificator } from './difficultModificator';
+import { sleep } from './sleep';
 
-export {difficultModificator};
+export {
+	difficultModificator,
+	sleep
+};

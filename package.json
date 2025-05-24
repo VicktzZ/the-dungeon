@@ -16,13 +16,17 @@
 		"dist"
 	],
 	"dependencies": {
+		"cli-spinner": "^0.2.10",
 		"figlet": "^1.8.1",
 		"inquirer": "^12.6.2",
-		"mobx": "^6.13.0",
+		"mobx": "^6.13.7",
+		"mobx-react-lite": "^4.1.0",
 		"random-seed": "^0.3.0"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^3.0.1",
+		"@types/cli-spinner": "^0.2.3",
+		"@types/figlet": "^1.7.0",
 		"@types/random-seed": "^0.3.5",
 		"@types/react": "^18.0.32",
 		"@vdemedes/prettier-config": "^2.0.1",

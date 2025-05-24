@@ -1,7 +1,9 @@
 import chalk, { type ColorName } from 'chalk'
-
+import inquirer from 'inquirer';
 export class Terminal {
-    async typeWriter(text: string, delay: number = 50): Promise<void> {
+    inquirer = inquirer
+
+	async typeWriter(text: string, delay: number = 30): Promise<void> {
         return new Promise((resolve) => {
             let i = 0;
             const interval = setInterval(() => {
@@ -15,10 +17,14 @@ export class Terminal {
         });
     }
 
-    async write(text: string, style?: ColorName, delay: number = 50): Promise<void> {
+    async write(text: string, style?: ColorName, delay: number = 30): Promise<void> {
         const styledText = chalk[style || 'white'](text);
         return this.typeWriter(styledText, delay);
     }
+
+	clear(): void {
+		process.stdout.write('\x1B[2J\x1B[0;0H');
+	}
 }
 
 export const terminal = new Terminal()

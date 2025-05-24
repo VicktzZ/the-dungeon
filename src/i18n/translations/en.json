@@ -1,0 +1,30 @@
+{
+	"game": {
+		"title": "The Dungeon",
+		"loading": "Loading..."
+	},
+	"menu": {
+		"newGame": "New Game",
+		"loadGame": "Load Game",
+		"exit": "Exit",
+		"settings": "Settings"
+	},
+	"settings": {
+		"language": "Language",
+		"difficulty": "Difficulty"
+	},
+	"difficulty": {
+		"easy": "Easy",
+		"medium": "Medium",
+		"hard": "Hard",
+		"nightmare": "Nightmare"
+	},
+	"language": {
+		"en": "English",
+		"pt": "Portuguese"
+	},
+	"generic_labels": {
+		"prompt": "What would you like to do?",
+		"back": "Back"
+	}
+}
