@@ -5,6 +5,7 @@ import MenuView from "./menuView"
 import chalk from "chalk"
 import { heroStats } from "@data"
 import { createPlayer, player } from "@models"
+import { heroColors } from "@consts/heroColors"
 
 async function selectHero() {
 	terminal.clear()
@@ -13,8 +14,8 @@ async function selectHero() {
 		name: 'value',
 		message: i18n.t('hero.prompt'),
 		choices: [
-			{ name: chalk.redBright(HeroOptions.Warrior), value: HeroOptions.Warrior },
-			{ name: chalk.green(HeroOptions.Archer), value: HeroOptions.Archer },
+			{ name: chalk[heroColors[HeroOptions.Warrior]](HeroOptions.Warrior), value: HeroOptions.Warrior },
+			{ name: chalk[heroColors[HeroOptions.Archer]](HeroOptions.Archer), value: HeroOptions.Archer },
 			// { name: HeroOptions.Mage, value: HeroOptions.Mage },
 			// { name: HeroOptions.Paladin, value: HeroOptions.Paladin },
 			// { name: HeroOptions.Rogue, value: HeroOptions.Rogue },

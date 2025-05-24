@@ -2,6 +2,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { LanguageOptions } from '../enums';
+import { gameSettings } from '@data';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = join(__filename, '..');
@@ -19,7 +20,7 @@ export class I18n {
     private translations: Translations = {};
 
     constructor() {
-        this.currentLanguage = LanguageOptions.En;
+        this.currentLanguage = gameSettings.language;
         this.loadTranslations();
     }
 

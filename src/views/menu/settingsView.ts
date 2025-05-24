@@ -2,6 +2,7 @@ import { terminal } from "@resources";
 import { SettingsOptions, LanguageOptions } from "@enums"
 import { i18n } from "@i18n"
 import MenuView from "./menuView";
+import { gameSettings } from "@data";
 
 export default async function SettingsView() {
 	terminal.clear()
@@ -31,6 +32,7 @@ export default async function SettingsView() {
 
 			if (language !== SettingsOptions.Back) {
 				i18n.setLanguage(language)
+				gameSettings.setLanguage(language)
 			}
 
 			await SettingsView()
