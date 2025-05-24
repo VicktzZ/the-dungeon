@@ -10,22 +10,21 @@ async function run() {
 	const spinner = new Spinner(i18n.t('game.loading'))
 
 	terminal.clear()
-    const title = figlet.textSync(i18n.t('game.title'), {
-        font: 'Standard',
-        horizontalLayout: 'full',
-        verticalLayout: 'full'
-    })
+	const title = figlet.textSync(i18n.t('game.title'), {
+			font: 'Standard',
+			horizontalLayout: 'full',
+			verticalLayout: 'full'
+	})
 
 	spinner.start()
 	await sleep(2000)
 	spinner.stop()
 
 	terminal.clear()
-    console.log(chalk.magenta(title))
+	console.log(chalk.magenta(title))
 	await sleep(2000)
 
 	await MenuView()
-
 }
 
 run()

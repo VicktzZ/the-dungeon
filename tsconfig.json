@@ -1,5 +1,5 @@
 {
-	"include": ["src/**/*", "src/types/**/*.d.ts"],
+	"include": ["src/**/*", "src/types/**/*.d.ts", ".d.ts"],
 	"compilerOptions": {
 		// Enable latest features
 		"lib": ["ESNext", "DOM"],

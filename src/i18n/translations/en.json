@@ -25,6 +25,20 @@
 	},
 	"generic_labels": {
 		"prompt": "What would you like to do?",
-		"back": "Back"
+		"back": "Back",
+		"yes": "Yes",
+		"no": "No"
+	},
+	"hero": {
+		"prompt": "Choose your hero",
+		"descriptions": {
+			"Darius": "Son of a blacksmith who died defending his village, Darius swore to never back down from danger. His heavy armor carries scars from battles that shaped his legend.",
+			"Lyria": "Raised in the forests of Elaria, Lyria grew up among hunters and nature spirits. Her aim is so precise that they say she can hit the beat of a butterfly's wings in the dark.",
+			"Auron": "A former student of the Arcane Tower, banished for pushing the limits of magic. Auron now seeks to uncover forbidden secrets and reach the pinnacle of arcane knowledge.",
+			"Selene": "Devotee of the goddess of light, Selene abandoned the luxuries of nobility to follow a life of healing and protection. Her hymns are capable of restoring even the most corrupted souls.",
+			"Tharros": "An old warrior converted by faith, Tharros carries a sacred oath to protect the weak and eradicate evil, even if it costs his own life.",
+			"Nyssa": "An orphan since childhood, Nyssa survived in the shadows of great cities, mastering the arts of stealth, poisons, and assassinations. Today, she chooses her targets — and never misses."
+		},
+		"choice": "Choose this hero?"
 	}
 }

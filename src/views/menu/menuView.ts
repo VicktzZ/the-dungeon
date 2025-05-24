@@ -8,15 +8,16 @@ import SettingsView from "./settingsView"
 
 export default async function MenuView() {
 	terminal.clear()
+
 	const title = figlet.textSync(i18n.t('game.title'), {
 		font: 'Standard',
 		horizontalLayout: 'full',
 		verticalLayout: 'full'
 	})
 
-    console.log(chalk.magenta(title))
+	console.log(chalk.magenta(title))
 
-	const { value } = await terminal.inquirer.prompt({
+	const { value } = await terminal.prompt({
 		type: 'list',
 		name: 'value',
 		message: i18n.t('generic_labels.prompt'),
