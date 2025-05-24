@@ -1,6 +1,7 @@
 {
   "difficulty": "medium",
   "language": "en",
+  "gameEnds": 0,
   "unlockedHeroes": [
     "Darius",
     "Lyria"

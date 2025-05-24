@@ -3,32 +3,9 @@ import { i18n } from "@i18n"
 import { SettingsOptions, DifficultyOptions, HeroOptions } from "@enums"
 import MenuView from "./menuView"
 import chalk from "chalk"
-import { heroStats } from "@data"
-import { createPlayer, player } from "@models"
-import { heroColors } from "@consts/heroColors"
-
-async function selectHero() {
-	terminal.clear()
-	const { value: hero } = await terminal.prompt({
-		type: 'list',
-		name: 'value',
-		message: i18n.t('hero.prompt'),
-		choices: [
-			{ name: chalk[heroColors[HeroOptions.Warrior]](HeroOptions.Warrior), value: HeroOptions.Warrior },
-			{ name: chalk[heroColors[HeroOptions.Archer]](HeroOptions.Archer), value: HeroOptions.Archer },
-			// { name: HeroOptions.Mage, value: HeroOptions.Mage },
-			// { name: HeroOptions.Paladin, value: HeroOptions.Paladin },
-			// { name: HeroOptions.Rogue, value: HeroOptions.Rogue },
-			{ name: i18n.t('generic_labels.back'), value: SettingsOptions.Back }
-		]
-	})
-
-	if (hero === SettingsOptions.Back) {
-		await MenuView()
-	} else {
-		showHeroDescription(hero)
-	}
-}
+import { heroStats, gameSettings } from "@data"
+import { createPlayer } from "@models"
+import { heroColors } from "@consts"
 
 async function showHeroDescription(hero: HeroOptions) {
 	if (hero === HeroOptions.Back) {
@@ -41,9 +18,9 @@ async function showHeroDescription(hero: HeroOptions) {
 	terminal.write(`
 		${chalk.red('HP')}: ${heroStats[hero].hp} ${chalk.gray.underline('(Vida máxima)')}
 		${chalk.blue('MP')}: ${heroStats[hero].mp} ${chalk.gray.underline('(Magia máxima)')}
-		${chalk.green('ATK')}: ${heroStats[hero].atk} ${chalk.gray.underline('(Adiciona ao ataque)')}
-		${chalk.yellow('DEF')}: ${heroStats[hero].def} ${chalk.gray.underline('(Adiciona à defesa)')}
-		${chalk.magenta('SPD')}: ${heroStats[hero].spd} ${chalk.gray.underline('(Aumenta a chance de se esquivar)')}
+		${chalk.green('ATK')}: ${heroStats[hero].atk} ${chalk.gray.underline('(Aumenta em 1 ao ataque)')}
+		${chalk.yellow('DEF')}: ${heroStats[hero].def} ${chalk.gray.underline('(Aumenta em 1 à defesa)')}
+		${chalk.magenta('SPD')}: ${heroStats[hero].spd} ${chalk.gray.underline('(Aumenta em 1% a chance de se esquivar)')}
 	\n`)
 
 	const { value: choice } = await terminal.prompt({
@@ -60,6 +37,28 @@ async function showHeroDescription(hero: HeroOptions) {
 		createPlayer(hero)
 	} else {
 		await selectHero()
+	}
+}
+
+async function selectHero() {
+	terminal.clear()
+	const { value: hero } = await terminal.prompt({
+		type: 'list',
+		name: 'value',
+		message: i18n.t('hero.prompt'),
+		choices: [
+			...gameSettings.unlockedHeroes.map(hero => ({
+				name: chalk[heroColors[hero]](hero),
+				value: hero
+			})),
+			{ name: i18n.t('generic_labels.back'), value: SettingsOptions.Back }
+		]
+	})
+
+	if (hero === SettingsOptions.Back) {
+		await MenuView()
+	} else {
+		await showHeroDescription(hero)
 	}
 }
 

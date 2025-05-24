@@ -4,6 +4,7 @@ import type { Views } from './views';
 import type { Heros, HeroColors } from './heros';
 import type { Stats } from './stats';
 import type { SkillType } from './skill';
+import type { MapTile, MapRow, GameMap, MapConfig } from './map';
 
 export type {
 	Views,
@@ -12,5 +13,9 @@ export type {
 	Heros as HeroName,
 	HeroColors,
 	Stats,
-	SkillType
+	SkillType,
+	MapTile,
+	MapRow,
+	GameMap,
+	MapConfig
 };
