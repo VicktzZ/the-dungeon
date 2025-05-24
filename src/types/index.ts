@@ -1,6 +1,9 @@
-import type {Event} from './event';
-import type {Views} from './views';
+import type { Difficult } from './difficult';
+import type { Event } from './event';
+import type { Views } from './views';
 
-type Difficult = 'Easy' | 'Medium' | 'Hard' | 'Nightmare';
-
-export type {Views as Screens, Event, Difficult};
+export type {
+	Views,
+	Event,
+	Difficult
+};

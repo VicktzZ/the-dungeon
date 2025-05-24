@@ -1,5 +1,5 @@
-import type {Event} from '@types';
-import {makeAutoObservable, observable} from 'mobx';
+import type { Event } from '@types';
+import { makeAutoObservable, observable } from 'mobx';
 import gen from 'random-seed';
 
 export class Dungeon {

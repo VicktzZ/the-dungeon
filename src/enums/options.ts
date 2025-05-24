@@ -1,8 +1,8 @@
 export enum MenuOptions {
-    NewGame = 'newGame',
-    LoadGame = 'loadGame',
+	NewGame = 'newGame',
+	LoadGame = 'loadGame',
 	Settings = 'settings',
-    Exit = 'exit'
+	Exit = 'exit'
 }
 
 export enum SettingsOptions {
@@ -22,3 +22,15 @@ export enum LanguageOptions {
 	En = 'en',
 	Pt = 'pt'
 }
+
+export enum HeroOptions {
+	Warrior = 'Darius',
+	Archer = 'Lyria',
+	Mage = 'Auron',
+	Priest = 'Selene',
+	Paladin = 'Tharros',
+	Rogue = 'Nyssa',
+
+	Back = 'back'
+}
+
