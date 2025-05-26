@@ -9,4 +9,5 @@ export interface MapConfig {
     startPos: number;
     endPos: number;
     pathWidth: number;
+	seed: string;
 }

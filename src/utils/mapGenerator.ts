@@ -1,5 +1,6 @@
 import type { GameMap, MapConfig } from '@types';
 import { MapTiles } from '@consts/mapTiles';
+import generation from 'random-seed';
 
 const ROOM_TYPES = [
 	MapTiles.EMPTY,
@@ -12,9 +13,10 @@ const ROOM_TYPES = [
 ] as const;
 
 export function generateMap(config: MapConfig): GameMap {
-    const { width, height, startPos, endPos, pathWidth } = config;
+    const { width, height, startPos, endPos, pathWidth, seed } = config;
     const map: GameMap = Array(height).fill(0).map(() => Array(width).fill(MapTiles.EMPTY));
 
+    const gen = generation.create(seed);
     const pathY = Math.floor(height / 2);
 	for (let x = startPos; x < endPos; x++) {
 		for (let y = pathY - Math.floor(pathWidth/2); y <= pathY + Math.floor(pathWidth/2); y++) {
@@ -25,10 +27,9 @@ export function generateMap(config: MapConfig): GameMap {
 	}
 
     for (let x = startPos + 5; x < endPos - 5; x += 10) {
-		const roomType = ROOM_TYPES[Math.floor(Math.random() * ROOM_TYPES.length)];
-		const roomY = Math.random() > 0.5
-			? pathY - 3
-			: pathY + 3;
+		const roomTypeIndex = gen.intBetween(0, ROOM_TYPES.length - 1);
+		const roomType = ROOM_TYPES[roomTypeIndex];
+		const roomY = gen.intBetween(pathY - 3, pathY + 3);
 
 		if (roomY >= 0 && roomY < height) {
 			const connectY = roomY > pathY ? pathY + 1 : pathY - 1;
@@ -43,13 +44,13 @@ export function generateMap(config: MapConfig): GameMap {
     map[pathY][startPos] = MapTiles.START;
     map[pathY][endPos - 1] = MapTiles.BOSSROOM;
 
-    addEnemiesToPath(map, pathY, startPos, endPos)
+    addEnemiesToPath(map, pathY, startPos, endPos, gen)
 
     return map;
 }
 
-function addEnemiesToPath(map: GameMap, pathY: number, startPos: number, endPos: number) {
-    const enemyCount = Math.floor(Math.random() * 3) + 3;
+function addEnemiesToPath(map: GameMap, pathY: number, startPos: number, endPos: number, gen: generation.RandomSeed) {
+    const enemyCount = gen.intBetween(3, 6);
     const availablePositions: number[] = [];
 
     for (let x = startPos + 5; x < endPos - 5; x++) {
@@ -59,7 +60,7 @@ function addEnemiesToPath(map: GameMap, pathY: number, startPos: number, endPos:
     }
 
     for (let i = availablePositions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = gen.intBetween(0, i);
         [availablePositions[i], availablePositions[j]] = [availablePositions[j], availablePositions[i]];
     }
     const selectedPositions: number[] = [];
@@ -71,15 +72,7 @@ function addEnemiesToPath(map: GameMap, pathY: number, startPos: number, endPos:
     }
 
     for (const pos of selectedPositions) {
-        const isBoss = Math.random() < 0.2;
+        const isBoss = gen.random() < 0.2;
         map[pathY][pos] = isBoss ? MapTiles.BOSS : MapTiles.ENEMY;
     }
 }
-
-export const config: MapConfig = {
-    width: 80,
-    height: 10,
-    startPos: 2,
-    endPos: 78,
-    pathWidth: 3
-};

@@ -79,5 +79,4 @@ export class I18n {
     }
 }
 
-// Create singleton instance
 export const i18n = new I18n();

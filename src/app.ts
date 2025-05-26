@@ -1,29 +1,24 @@
 import { terminal } from "@resources"
-import { Spinner } from 'cli-spinner'
 import { sleep } from "@utils"
 import { i18n } from '@i18n'
-import { MenuView } from '@views'
+import { LoadingView, MenuView } from '@views'
 import chalk from "chalk"
 import figlet from 'figlet'
 
 async function run() {
-	const spinner = new Spinner(i18n.t('game.loading'))
-
 	terminal.clear()
 	const title = figlet.textSync(i18n.t('game.title'), {
-			font: 'Standard',
-			horizontalLayout: 'full',
-			verticalLayout: 'full'
+		font: 'Standard',
+		horizontalLayout: 'full',
+		verticalLayout: 'full'
 	})
 
-	spinner.start()
-	await sleep(2000)
-	spinner.stop()
+	await LoadingView(async () => {
+		terminal.clear()
+		terminal.write(chalk.magenta(title))
+	})
 
-	terminal.clear()
-	terminal.write(chalk.magenta(title))
 	await sleep(2000)
-
 	await MenuView()
 }
 

@@ -1,7 +1,13 @@
 {
 	"game": {
 		"title": "The Dungeon",
-		"loading": "Carregando..."
+		"loading": "Carregando...",
+		"floors": {
+			"1": "Andar 1",
+			"2": "Andar 2",
+			"3": "Andar 3",
+			"4": "Andar 4"
+		}
 	},
 	"menu": {
 		"newGame": "Novo Jogo",
@@ -33,7 +39,7 @@
 		"prompt": "Escolha seu herói",
 		"descriptions": {
 			"Darius": "Filho de um ferreiro que morreu defendendo sua vila, Darius jurou nunca mais recuar diante do perigo. Sua armadura pesada carrega cicatrizes de batalhas que moldaram sua lenda.",
-			"Lyria": "ascida nas florestas de Elaria, Lyria cresceu entre caçadores e espíritos da natureza. Sua mira é tão precisa que dizem que ela pode atingir o bater de asas de um inseto no escuro.",
+			"Lyria": "Nascida nas florestas de Elaria, Lyria cresceu entre caçadores e espíritos da natureza. Sua mira é tão precisa que dizem que ela pode atingir o bater de asas de um inseto no escuro.",
 			"Auron": "Um ex-estudante da Torre Arcana, banido por desafiar os próprios limites da magia. Auron busca agora desvendar segredos proibidos e alcançar o ápice do conhecimento arcano.",
 			"Selene": "Devota da deusa da luz, Selene abandonou os luxos da nobreza para seguir uma vida de cura e proteção. Seus cânticos são capazes de restaurar até as almas mais corrompidas.",
 			"Tharros": "Um antigo guerreiro convertido pela fé, Tharros carrega consigo um juramento sagrado de proteger os fracos e erradicar o mal, mesmo que isso custe sua própria vida.",

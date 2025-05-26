@@ -6,6 +6,9 @@ import chalk from "chalk"
 import { heroStats, gameSettings } from "@data"
 import { createPlayer } from "@models"
 import { heroColors } from "@consts"
+import { sleep } from "@utils"
+import LoadingView from "@views/misc/loadingView"
+import GameView from "@views/game/gameView"
 
 async function showHeroDescription(hero: HeroOptions) {
 	if (hero === HeroOptions.Back) {
@@ -83,4 +86,8 @@ export default async function NewGameView() {
 	}
 
 	await selectHero()
+
+	await LoadingView(async () => {
+		await GameView()
+	})
 }
