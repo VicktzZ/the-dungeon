@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
-import { LanguageOptions } from '../enums';
+import { LanguageOptionsEnum } from '../enums';
 import { gameSettings } from '@data';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,7 +16,7 @@ interface Translations {
 }
 
 export class I18n {
-    private currentLanguage: LanguageOptions;
+    private currentLanguage: LanguageOptionsEnum;
     private translations: Translations = {};
 
     constructor() {
@@ -25,7 +25,7 @@ export class I18n {
     }
 
     private loadTranslations(): void {
-        const languages = [LanguageOptions.En, LanguageOptions.Pt];
+        const languages = [LanguageOptionsEnum.En, LanguageOptionsEnum.Pt];
         languages.forEach(lang => {
             try {
                 const translationFile = join(__dirname, 'translations', `${lang}.json`);
@@ -36,7 +36,7 @@ export class I18n {
         });
     }
 
-    public setLanguage(language: LanguageOptions): void {
+    public setLanguage(language: LanguageOptionsEnum): void {
         if (this.translations[language]) {
             this.currentLanguage = language;
         } else {
@@ -70,12 +70,12 @@ export class I18n {
         return undefined;
     }
 
-    public get language(): LanguageOptions {
+    public get language(): LanguageOptionsEnum {
         return this.currentLanguage;
     }
 
-    public get availableLanguages(): LanguageOptions[] {
-        return Object.keys(this.translations) as LanguageOptions[];
+    public get availableLanguages(): LanguageOptionsEnum[] {
+        return Object.keys(this.translations) as LanguageOptionsEnum[];
     }
 }
 

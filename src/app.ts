@@ -1,21 +1,14 @@
 import { terminal } from "@resources"
-import { sleep } from "@utils"
+import { figletTitle, sleep } from "@utils"
 import { i18n } from '@i18n'
 import { LoadingView, MenuView } from '@views'
-import chalk from "chalk"
-import figlet from 'figlet'
 
 async function run() {
 	terminal.clear()
-	const title = figlet.textSync(i18n.t('game.title'), {
-		font: 'Standard',
-		horizontalLayout: 'full',
-		verticalLayout: 'full'
-	})
 
-	await LoadingView(async () => {
+	await LoadingView(() => {
 		terminal.clear()
-		terminal.write(chalk.magenta(title))
+		figletTitle(i18n.t('game.title'), { color: 'magenta' })
 	})
 
 	await sleep(2000)

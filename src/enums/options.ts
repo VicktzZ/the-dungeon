@@ -1,29 +1,29 @@
-export enum MenuOptions {
+export enum MenuOptionsEnum {
 	NewGame = 'newGame',
 	LoadGame = 'loadGame',
 	Settings = 'settings',
 	Exit = 'exit'
 }
 
-export enum SettingsOptions {
+export enum SettingsOptionsEnum {
 	Language = 'language',
 	Difficulty = 'difficulty',
 	Back = 'back',
 }
 
-export enum DifficultyOptions {
+export enum DifficultyOptionsEnum {
 	Easy = 'easy',
 	Medium = 'medium',
 	Hard = 'hard',
 	Nightmare = 'nightmare'
 }
 
-export enum LanguageOptions {
+export enum LanguageOptionsEnum {
 	En = 'en',
 	Pt = 'pt'
 }
 
-export enum HeroOptions {
+export enum HeroOptionsEnum {
 	Warrior = 'Darius',
 	Archer = 'Lyria',
 	Mage = 'Auron',

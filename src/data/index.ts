@@ -1,14 +1,14 @@
 import type { Skill } from '@models';
 import type { HeroName, Stats } from '@types';
-import type { DifficultyOptions, LanguageOptions } from '@enums';
+import type { DifficultyOptionsEnum, LanguageOptionsEnum } from '@enums';
 import { readFileSync, writeFileSync } from 'fs';
 
 const heroSkills = JSON.parse(readFileSync('./data/heroSkills.json', 'utf-8')) as Record<HeroName, Skill[]>;
 const heroStats = JSON.parse(readFileSync('./data/heroStats.json', 'utf-8')) as Record<HeroName, Stats>;
 
 class GameSettings {
-	difficulty: DifficultyOptions;
-	language: LanguageOptions;
+	difficulty: DifficultyOptionsEnum;
+	language: LanguageOptionsEnum;
 	unlockedHeroes: HeroName[];
 
 	constructor() {
@@ -18,12 +18,12 @@ class GameSettings {
 		this.unlockedHeroes = settings.unlockedHeroes;
 	}
 
-	public setDifficulty(difficulty: DifficultyOptions) {
+	public setDifficulty(difficulty: DifficultyOptionsEnum) {
 		this.difficulty = difficulty;
 		this.save();
 	}
 
-	public setLanguage(language: LanguageOptions) {
+	public setLanguage(language: LanguageOptionsEnum) {
 		this.language = language;
 		this.save();
 	}

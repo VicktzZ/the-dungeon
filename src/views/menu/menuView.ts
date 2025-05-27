@@ -1,4 +1,4 @@
-import { MenuOptions } from "@enums"
+import { MenuOptionsEnum } from "@enums"
 import { i18n } from "@i18n"
 import { terminal } from "@resources"
 import chalk from "chalk"
@@ -22,23 +22,23 @@ export default async function MenuView() {
 		name: 'value',
 		message: i18n.t('generic_labels.prompt'),
 		choices: [
-			{ name: i18n.t('menu.newGame'), value: MenuOptions.NewGame },
-			{ name: i18n.t('menu.loadGame'), value: MenuOptions.LoadGame },
-			{ name: i18n.t('menu.settings'), value: MenuOptions.Settings },
-			{ name: i18n.t('menu.exit'), value: MenuOptions.Exit },
+			{ name: i18n.t('menu.newGame'), value: MenuOptionsEnum.NewGame },
+			{ name: i18n.t('menu.loadGame'), value: MenuOptionsEnum.LoadGame },
+			{ name: i18n.t('menu.settings'), value: MenuOptionsEnum.Settings },
+			{ name: i18n.t('menu.exit'), value: MenuOptionsEnum.Exit },
 		],
 	})
 
 	switch (value) {
-		case MenuOptions.NewGame:
+		case MenuOptionsEnum.NewGame:
 			await NewGameView()
 			break
-		case MenuOptions.LoadGame:
+		case MenuOptionsEnum.LoadGame:
 			break
-		case MenuOptions.Settings:
+		case MenuOptionsEnum.Settings:
 			await SettingsView()
 			break
-		case MenuOptions.Exit:
+		case MenuOptionsEnum.Exit:
 			process.exit(0)
 		default:
 			break

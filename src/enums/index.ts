@@ -1,11 +1,15 @@
-import { MenuOptions, SettingsOptions, DifficultyOptions, LanguageOptions, HeroOptions } from "./options"
+import { MenuOptionsEnum, SettingsOptionsEnum, DifficultyOptionsEnum, LanguageOptionsEnum, HeroOptionsEnum } from "./options"
 import { ViewsEnum } from "./views"
+import { MapTiles } from "./mapTilesEnum"
+import { HeroColorsEnum } from "./heroColorsEnum"
 
 export {
-	MenuOptions,
-	SettingsOptions,
-	DifficultyOptions,
-	LanguageOptions,
-	HeroOptions,
+	MapTiles,
+	HeroColorsEnum,
+	MenuOptionsEnum,
+	SettingsOptionsEnum,
+	DifficultyOptionsEnum,
+	LanguageOptionsEnum,
+	HeroOptionsEnum,
 	ViewsEnum
 }

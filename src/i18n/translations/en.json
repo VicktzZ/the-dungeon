@@ -2,11 +2,31 @@
 	"game": {
 		"title": "The Dungeon",
 		"loading": "Loading...",
-		"floors": {
-			"1": "Floor 1",
-			"2": "Floor 2",
-			"3": "Floor 3",
-			"4": "Floor 4"
+		"direction": {
+			"prompt": "Choose a direction",	
+			"up": "Up",
+			"down": "Down",
+			"left": "Left",
+			"right": "Right"
+		},
+		"floor": {
+			"floor": "Floor",
+			"1": {
+				"title": "Floor 1",
+				"description": "Ruins"
+			},
+			"2": {
+				"title": "Floor 2",
+				"description": "Castle"
+			},
+			"3": {
+				"title": "Floor 3",
+				"description": "Mines"
+			},
+			"4": {
+				"title": "Floor 4",
+				"description": "Dragon's Lair"
+			}
 		}
 	},
 	"menu": {

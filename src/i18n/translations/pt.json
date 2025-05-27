@@ -2,11 +2,31 @@
 	"game": {
 		"title": "The Dungeon",
 		"loading": "Carregando...",
-		"floors": {
-			"1": "Andar 1",
-			"2": "Andar 2",
-			"3": "Andar 3",
-			"4": "Andar 4"
+		"direction": {
+			"prompt": "Escolha uma direção",
+			"up": "Cima",
+			"down": "Baixo",
+			"left": "Esquerda",
+			"right": "Direita"
+		},
+		"floor": {
+			"floor": "Andar",
+			"1": {
+				"title": "Andar 1",
+				"description": "Ruína"
+			},
+			"2": {
+				"title": "Andar 2",
+				"description": "Castelo"
+			},
+			"3": {
+				"title": "Andar 3",
+				"description": "Minas"
+			},
+			"4": {
+				"title": "Andar 4",
+				"description": "Covil de Dragões"
+			}
 		}
 	},
 	"menu": {

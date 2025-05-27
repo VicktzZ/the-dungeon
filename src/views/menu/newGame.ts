@@ -1,17 +1,17 @@
 import { terminal } from "@resources"
 import { i18n } from "@i18n"
-import { SettingsOptions, DifficultyOptions, HeroOptions } from "@enums"
+import { SettingsOptionsEnum, DifficultyOptionsEnum, HeroOptionsEnum } from "@enums"
 import MenuView from "./menuView"
 import chalk from "chalk"
 import { heroStats, gameSettings } from "@data"
 import { createPlayer } from "@models"
-import { heroColors } from "@consts"
+import { HeroColorsEnum } from "@enums"
 import { sleep } from "@utils"
 import LoadingView from "@views/misc/loadingView"
 import GameView from "@views/game/gameView"
 
-async function showHeroDescription(hero: HeroOptions) {
-	if (hero === HeroOptions.Back) {
+async function showHeroDescription(hero: HeroOptionsEnum) {
+	if (hero === HeroOptionsEnum.Back) {
 		await selectHero()
 		return
 	}
@@ -51,14 +51,14 @@ async function selectHero() {
 		message: i18n.t('hero.prompt'),
 		choices: [
 			...gameSettings.unlockedHeroes.map(hero => ({
-				name: chalk[heroColors[hero]](hero),
+				name: chalk[HeroColorsEnum[hero]](hero),
 				value: hero
 			})),
-			{ name: i18n.t('generic_labels.back'), value: SettingsOptions.Back }
+			{ name: i18n.t('generic_labels.back'), value: SettingsOptionsEnum.Back }
 		]
 	})
 
-	if (hero === SettingsOptions.Back) {
+	if (hero === SettingsOptionsEnum.Back) {
 		await MenuView()
 	} else {
 		await showHeroDescription(hero)
@@ -73,21 +73,20 @@ export default async function NewGameView() {
 		name: 'value',
 		message: i18n.t('settings.difficulty'),
 		choices: [
-			{ name: i18n.t('difficulty.easy'), value: DifficultyOptions.Easy },
-			{ name: i18n.t('difficulty.medium'), value: DifficultyOptions.Medium },
-			{ name: i18n.t('difficulty.hard'), value: DifficultyOptions.Hard },
-			{ name: i18n.t('generic_labels.back'), value: SettingsOptions.Back },
-			// { name: i18n.t('difficulty.nightmare'), value: DifficultyOptions.Nightmare }
+			{ name: i18n.t('difficulty.easy'), value: DifficultyOptionsEnum.Easy },
+			{ name: i18n.t('difficulty.medium'), value: DifficultyOptionsEnum.Medium },
+			{ name: i18n.t('difficulty.hard'), value: DifficultyOptionsEnum.Hard },
+			{ name: i18n.t('generic_labels.back'), value: SettingsOptionsEnum.Back },
+			// { name: i18n.t('difficulty.nightmare'), value: DifficultyOptionsEnum.Nightmare }
 		]
 	})
 
-	if (difficulty === SettingsOptions.Back) {
+	if (difficulty === SettingsOptionsEnum.Back) {
 		await MenuView()
 	}
 
 	await selectHero()
 
-	await LoadingView(async () => {
-		await GameView()
-	})
+	await LoadingView()
+	await GameView()
 }

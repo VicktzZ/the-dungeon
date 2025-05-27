@@ -1,0 +1,18 @@
+export enum MapTiles {
+	EMPTY = ' ',
+	START = 'S',
+	MERCHANT = 'M',
+	CHEST = 'C',
+	MYSTERY = '?',
+	VILLAGE = 'V',
+	BOSS = 'B',
+	BOSSROOM = '!',
+	ENEMY = 'E',
+	PLAYER = 'P',
+	PATH_H = '-',
+	PATH_V = '|',
+	PATH_TR = '/',
+	PATH_TL = '\\',
+	ARROW_L = '<',
+	ARROW_R = '>',
+};
