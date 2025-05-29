@@ -9,6 +9,7 @@ import { HeroColorsEnum } from "@enums"
 import { sleep } from "@utils"
 import LoadingView from "@views/misc/loadingView"
 import GameView from "@views/game/gameView"
+import { dungeon } from "@resources/Dungeon"
 
 async function showHeroDescription(hero: HeroOptionsEnum) {
 	if (hero === HeroOptionsEnum.Back) {
@@ -81,12 +82,10 @@ export default async function NewGameView() {
 		]
 	})
 
-	if (difficulty === SettingsOptionsEnum.Back) {
-		await MenuView()
-	}
+	if (difficulty === SettingsOptionsEnum.Back) await MenuView()
+	else dungeon.setDifficulty(difficulty)
 
 	await selectHero()
-
 	await LoadingView()
 	await GameView()
 }

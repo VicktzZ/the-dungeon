@@ -4,13 +4,14 @@ import gen from 'random-seed';
 import { terminal } from './Terminal';
 import { i18n } from '@i18n';
 import { MapGenerator } from './MapGenerator';
-import { MapTiles } from '@enums';
+import { DifficultyOptionsEnum, MapTiles } from '@enums';
 
 export class Dungeon {
 	private seed: string = '';
 	private gen: gen.RandomSeed = {} as gen.RandomSeed;
 	private map: GameMap = [];
 	private mapGenerator: MapGenerator = {} as MapGenerator;
+	private difficulty: DifficultyOptionsEnum = DifficultyOptionsEnum.Medium;
 	private playerPos: { x: number; y: number } = { x: 0, y: 0 };
 	private dungeonConfig?: { seedVisible?: boolean };
 	private mapConfig: MapConfig = {
@@ -44,6 +45,10 @@ export class Dungeon {
 		return this.mapConfig;
 	}
 
+	getDifficulty(): DifficultyOptionsEnum {
+		return this.difficulty;
+	}
+
 	// Setters
 
 	setMapConfig(config: MapConfig) {
@@ -55,11 +60,15 @@ export class Dungeon {
 		this.gen = gen.create(seed);
 	}
 
+	setDifficulty(difficulty: DifficultyOptionsEnum) {
+		this.difficulty = difficulty;
+	}
+
 	// Utils
 
 	generateMap(): GameMap {
 		this.mapGenerator = new MapGenerator(this.mapConfig)
-		return this.map = this.mapGenerator.generate();
+		return this.map = this.mapGenerator.generate({ difficulty: this.difficulty });
 	}
 
 	randomPercent(percent: number): boolean {
@@ -70,7 +79,7 @@ export class Dungeon {
 		terminal.clear()
 		this.mapGenerator.render(this.playerPos)
 		terminal.write('\n' + i18n.t('game.floor.' + this.floor + '.title'))
-		if (this.dungeonConfig?.seedVisible) terminal.write(`\nSeed: ${this.seed}`)
+		if (this.dungeonConfig?.seedVisible) terminal.write(`\nSeed: ${this.seed}\n`)
 	}
 
 	isDirectionBlocked(dx: number, dy: number): boolean {

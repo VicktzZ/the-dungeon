@@ -1,4 +1,4 @@
-import { MapTiles } from '@enums';
+import { DifficultyOptionsEnum, MapTiles } from '@enums';
 import type { GameMap, MapConfig } from '@types';
 import generation from 'random-seed';
 import chalk from 'chalk';
@@ -14,10 +14,9 @@ export class MapGenerator {
 		MapTiles.EMPTY,
 		MapTiles.MERCHANT,
 		MapTiles.MYSTERY,
-		MapTiles.ENEMY,
 		MapTiles.VILLAGE,
 		MapTiles.BOSS,
-		MapTiles.CHEST
+		MapTiles.CHEST,
 	];
 
 	private TILE_DISPLAY: Record<MapTiles, string> = {
@@ -45,11 +44,11 @@ export class MapGenerator {
 		this.pathY = Math.floor(this.config.height / 2);
 	}
 
-	public generate(): GameMap {
+	public generate({ difficulty }: { difficulty: DifficultyOptionsEnum }): GameMap {
 		this.generateMainPath();
 		this.generateRooms();
 		this.setStartAndBossPositions();
-		this.addEnemiesToPath();
+		this.addEnemiesToPath(difficulty);
 
 		return this.map;
 	}
@@ -62,9 +61,10 @@ export class MapGenerator {
 
 	private generateMainPath(): void {
 		const { startPos, endPos, pathWidth } = this.config;
+		const halfWidth = Math.floor(pathWidth / 2);
 
 		for (let x = startPos; x < endPos; x++) {
-			for (let y = this.pathY - Math.floor(pathWidth/2); y <= this.pathY + Math.floor(pathWidth/2); y++) {
+			for (let y = this.pathY - halfWidth; y <= this.pathY + halfWidth; y++) {
 				if (y >= 0 && y < this.config.height) {
 					this.map[y][x] = MapTiles.PATH_H;
 				}
@@ -81,12 +81,21 @@ export class MapGenerator {
 			const roomY = this.gen.intBetween(this.pathY - 3, this.pathY + 3);
 
 			if (roomY >= 0 && roomY < this.config.height) {
-				const connectY = roomY > this.pathY ? this.pathY + 1 : this.pathY - 1;
-				for (let y = Math.min(roomY, connectY); y <= Math.max(roomY, connectY); y++) {
-					this.map[y][x] = MapTiles.PATH_V;
+				const startY = Math.min(roomY, this.pathY);
+				const endY = Math.max(roomY, this.pathY);
+
+				this.map[this.pathY][x] = MapTiles.PATH_H;
+				for (let y = startY; y <= endY; y++) {
+					if (this.map[y][x] === MapTiles.EMPTY || this.map[y][x] === MapTiles.PATH_V) {
+						this.map[y][x] = MapTiles.PATH_V;
+					}
 				}
 
 				this.map[roomY][x] = roomType;
+
+				if (roomY !== this.pathY) {
+					this.map[this.pathY][x] = MapTiles.PATH_H;
+				}
 			}
 		}
 	}
@@ -96,13 +105,22 @@ export class MapGenerator {
 		this.map[this.pathY][this.config.endPos - 1] = MapTiles.BOSSROOM;
 	}
 
-	private addEnemiesToPath(): void {
+	private addEnemiesToPath(difficulty: DifficultyOptionsEnum): void {
 		const { startPos, endPos } = this.config;
-		const enemyCount = this.gen.intBetween(3, 6);
+		const enemyCountByDifficulty: Record<DifficultyOptionsEnum, number[]> = {
+			[DifficultyOptionsEnum.Easy]: [2, 3],
+			[DifficultyOptionsEnum.Medium]: [3, 5],
+			[DifficultyOptionsEnum.Hard]: [5, 6],
+			[DifficultyOptionsEnum.Nightmare]: [6, 7],
+		}
+
+		const enemyCount = this.gen.intBetween(enemyCountByDifficulty[difficulty][0], enemyCountByDifficulty[difficulty][1]);
 		const availablePositions: number[] = [];
 
 		for (let x = startPos + 5; x < endPos - 5; x++) {
-			if (this.map[this.pathY][x] === MapTiles.PATH_H) {
+			if (this.map[this.pathY][x] === MapTiles.PATH_H &&
+				this.map[this.pathY][x - 1] === MapTiles.PATH_H &&
+				this.map[this.pathY][x + 1] === MapTiles.PATH_H) {
 				availablePositions.push(x);
 			}
 		}
@@ -111,7 +129,6 @@ export class MapGenerator {
 			const j = this.gen.intBetween(0, i);
 			[availablePositions[i], availablePositions[j]] = [availablePositions[j], availablePositions[i]];
 		}
-
 		const selectedPositions: number[] = [];
 		for (const pos of availablePositions) {
 			if (selectedPositions.every(p => Math.abs(p - pos) > 5)) {
@@ -123,6 +140,23 @@ export class MapGenerator {
 		for (const pos of selectedPositions) {
 			const isBoss = this.gen.random() < 0.2;
 			this.map[this.pathY][pos] = isBoss ? MapTiles.BOSS : MapTiles.ENEMY;
+			const aboveY = this.pathY - 1;
+			const belowY = this.pathY + 1;
+
+			if (aboveY >= 0 && (this.map[aboveY][pos] === MapTiles.EMPTY || this.map[aboveY][pos] === MapTiles.PATH_H)) {
+				this.map[aboveY][pos] = MapTiles.PATH_V;
+			}
+
+			if (belowY < this.config.height && (this.map[belowY][pos] === MapTiles.EMPTY || this.map[belowY][pos] === MapTiles.PATH_H)) {
+				this.map[belowY][pos] = MapTiles.PATH_V;
+			}
+
+			if (pos > 0 && this.map[this.pathY][pos - 1] === MapTiles.EMPTY) {
+				this.map[this.pathY][pos - 1] = MapTiles.PATH_H;
+			}
+			if (pos < this.config.width - 1 && this.map[this.pathY][pos + 1] === MapTiles.EMPTY) {
+				this.map[this.pathY][pos + 1] = MapTiles.PATH_H;
+			}
 		}
 	}
 
