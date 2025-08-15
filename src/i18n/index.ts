@@ -7,10 +7,6 @@ import { gameSettings } from '@data';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = join(__filename, '..');
 
-interface Translation {
-    [key: string]: string | Translation;
-}
-
 interface Translations {
     [language: string]: Record<string, any>;
 }

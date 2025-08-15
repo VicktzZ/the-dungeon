@@ -14,6 +14,7 @@ export class Dungeon {
 	private difficulty: DifficultyOptionsEnum = DifficultyOptionsEnum.Medium;
 	private playerPos: { x: number; y: number } = { x: 0, y: 0 };
 	private dungeonConfig?: { seedVisible?: boolean };
+	private eventsAlreadyPlayed: [[number, number]] = [] as unknown as [[number, number]]
 	private mapConfig: MapConfig = {
 		width: 80,
 		height: 10,
@@ -45,8 +46,27 @@ export class Dungeon {
 		return this.mapConfig;
 	}
 
+	getEventsAlreadyPlayed() {
+		return this.eventsAlreadyPlayed
+	}
+
 	getDifficulty(): DifficultyOptionsEnum {
 		return this.difficulty;
+	}
+	
+	getTile(dx: number, dy: number) {
+		return this.map[dy][dx]
+	}
+
+	getTileFromPlayer(dx: number, dy: number) {
+		return this.map[this.playerPos.y + dy][this.playerPos.x + dx]
+	}
+
+	getPlayerPos() {
+		return {
+			coords: this.playerPos,
+			tile: this.map[this.playerPos.y][this.playerPos.x]
+		}
 	}
 
 	// Setters
@@ -62,6 +82,10 @@ export class Dungeon {
 
 	setDifficulty(difficulty: DifficultyOptionsEnum) {
 		this.difficulty = difficulty;
+	}
+
+	setEventsAlreadyPlayed(coords: [number, number]) {
+		this.eventsAlreadyPlayed.push(coords)
 	}
 
 	// Utils

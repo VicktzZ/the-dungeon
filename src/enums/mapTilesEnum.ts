@@ -16,3 +16,15 @@ export enum MapTiles {
 	ARROW_L = '<',
 	ARROW_R = '>',
 };
+
+export const TILES_WITHOUT_EVENT = [
+	MapTiles.EMPTY,
+	MapTiles.ARROW_L,
+	MapTiles.ARROW_R,
+	MapTiles.PATH_H,
+	MapTiles.PATH_TL,
+	MapTiles.PATH_TR,
+	MapTiles.PATH_V,
+	MapTiles.PLAYER,
+	MapTiles.START
+]

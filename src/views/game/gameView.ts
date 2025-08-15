@@ -4,6 +4,9 @@ import { terminal } from "@resources";
 import { i18n } from "@i18n";
 import { sleep } from "@utils";
 import chalk from "chalk";
+import { MapTiles } from "@enums";
+import { TILES_WITHOUT_EVENT } from "@enums/mapTilesEnum";
+import { DungeonEvent } from "@resources/Event";
 
 export default async function GameView() {
 	await NewFloorView(dungeon.floor, 'green')
@@ -54,10 +57,20 @@ export default async function GameView() {
 			lastDirection = 'right'
 			dungeon.movePlayer(1, 0)
 		}
+		
+		const mapTile = dungeon.getPlayerPos().tile
+		if (!TILES_WITHOUT_EVENT.includes(mapTile)) {
+			new DungeonEvent(mapTile)
+			dungeon.setEventsAlreadyPlayed([
+				dungeon.getPlayerPos().coords.y,
+				dungeon.getPlayerPos().coords.x,
+			])
+
+			console.log(dungeon.getEventsAlreadyPlayed())
+			continue
+		}
 
 		dungeon.renderMap()
 	}
-
-
 }
 

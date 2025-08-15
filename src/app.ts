@@ -4,7 +4,13 @@ import { i18n } from '@i18n'
 import { LoadingView, MenuView } from '@views'
 
 async function run() {
+	const viewParam = process.argv.find(param => param.includes('--'))?.split('--')[1]
 	terminal.clear()
+
+	if (viewParam) {
+		const module = await import(`./views/index`) as Record<string, any>
+		return await module[viewParam]()
+	}
 
 	await LoadingView(() => {
 		terminal.clear()
