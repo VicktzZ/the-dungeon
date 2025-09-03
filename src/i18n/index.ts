@@ -76,3 +76,4 @@ export class I18n {
 }
 
 export const i18n = new I18n();
+i18n.setLanguage(gameSettings.language);
